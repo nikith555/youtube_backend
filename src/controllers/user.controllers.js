@@ -166,6 +166,7 @@ const logoutUser = asyncHandler( async(req, res) => {
 })
 
 const refreshAccessToken = asyncHandler(async(req, res) =>{
+
     const incomingRefreshToken = req.cookie.refreshToken || req.body.refreshToken
 
     if(!incomingRefreshToken){
@@ -173,6 +174,7 @@ const refreshAccessToken = asyncHandler(async(req, res) =>{
     }
     
     try {
+
         const decodedToken = jwt.verify(incomingRefreshToken,process.env.REFRESH_TOKEN_SECRET)
         
         const user = await User.findById(decodedToken._id)
